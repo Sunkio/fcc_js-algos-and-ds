@@ -1,48 +1,34 @@
-function convertToRoman(num) {
-  let str = "";
-  while (num > 0) {
-    if (num >= 1000) {
-      str += 'M';
-      num -= 1000;
-    } else if (num >= 900) {
-      str += 'CM';
-      num -= 900;
-    } else if (num >= 500) {
-      str += 'D';
-      num -= 500;
-    } else if (num >= 400) {
-      str += 'CD';
-      num -= 400;
-    } else if (num >= 100) {
-      str += 'C';
-      num -= 100;
-    } else if (num >= 90) {
-      str += 'XC';
-      num -= 90;
-    } else if (num >= 50) {
-      str += 'L';
-      num -= 50;
-    } else if (num >= 40) {
-      str += 'XL';
-      num -= 40;
-    } else if (num >= 10) {
-      str += 'X';
-      num -= 10;
-    } else if (num >= 9) {
-      str += 'IX';
-      num -= 9;
-    } else if (num >= 5) {
-      str += 'V';
-      num -= 5;
-    } else if (num >= 4) {
-      str += 'IV';
-      num -= 4;
-    } else if (num >= 1) {
-      str += 'I';
-      num -= 1;
+class Converter {
+  constructor (arabNum) {
+    this.arabNum = arabNum;
+    this.romNumFinal = "";
+  }
+
+  convertNum(romNum, romNumValue) {
+    while (this.arabNum >= romNumValue) {
+      this.romNumFinal += romNum;
+      this.arabNum -= romNumValue;
     }
   }
- return str;
 }
 
-convertToRoman(36);
+function convertToRoman(num) {
+  let converter = new Converter(num);
+
+  converter.convertNum('M', 1000);
+  converter.convertNum('CM', 900);
+  converter.convertNum('D', 500);
+  converter.convertNum('CD', 400);
+  converter.convertNum('C', 100);
+  converter.convertNum('XC', 90);
+  converter.convertNum('L', 50);
+  converter.convertNum('XL', 40);
+  converter.convertNum('X', 10);
+  converter.convertNum('IX', 9);
+  converter.convertNum('V', 5);
+  converter.convertNum('IV', 4);
+  converter.convertNum('I', 1);
+  return converter.romNumFinal;
+}
+
+console.log(convertToRoman(5469));
